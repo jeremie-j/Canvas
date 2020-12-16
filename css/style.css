@@ -33,3 +33,9 @@ a {
   color: #f2f4f4;
   border: 2px solid #f2f4f4;
 }
+
+@media (max-width: 640px) {
+  div {
+    height: 80vh;
+  }
+}
