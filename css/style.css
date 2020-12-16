@@ -1,0 +1,35 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #212f3d;
+}
+
+div {
+  height: 100vh;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
+}
+
+body {
+  scroll-behavior: smooth;
+  font-family: "Poppins", sans-serif;
+  color: #f2f4f4;
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+}
+
+a {
+  text-decoration: none;
+  padding: 15px 50px;
+  border-radius: 5px;
+  font-weight: bold;
+  color: #f2f4f4;
+  border: 2px solid #f2f4f4;
+}
