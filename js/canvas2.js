@@ -1,7 +1,7 @@
 var canvas = document.getElementById("canvas2");
 var ctx = canvas.getContext("2d");
 
-var dot = [[1, 1, 1, 1, 1, 1]];
+var dot = [[1, 1, 1, 1, 1, 1]]; //Composition de la liste dot [x,y,vx,vy,taille,couleur]
 var lastMove = 0;
 var oldx = 10;
 var oldy = 10;
@@ -14,7 +14,7 @@ function draw() {
   //|| document.body.clientWidth;
   canvas.width = width;
   background();
-  dotGeneration();
+  console.log(dot[1]);
   dotDraw();
 }
 
@@ -23,31 +23,8 @@ function background() {
   ctx.fillStyle = "#303030";
   ctx.fill();
 }
-function dotGeneration() {
-  canvas.addEventListener("mousemove", function (evt) {
-    mousePos = getMousePos(canvas, evt);
-  });
-  if (dot.length < 2000) {
-    var x = mousePos.x;
-    var y = mousePos.y;
-    var vx = Math.round((mousePos.x - oldx) / 10);
-    var vy = Math.round((mousePos.y - oldy) / 10);
-    var taille = 20;
-    var color = randomColor();
-    dot.push([x, y, vx, vy, taille, color]);
-    oldx = mousePos.x;
-    oldy = mousePos.y;
-    mousePos = 100;
-  } else {
-    dot.shift();
-  }
-}
-function velocity() {
-  var velocity = getRandomInt(360);
-  velocity = Math.cos(velocity);
 
-  return velocity;
-}
+
 function positive() {
   if (getRandomInt(2) == 0) {
     return true;
@@ -68,7 +45,7 @@ function dotDraw() {
     dot[i][0] += dot[i][2];
     dot[i][1] += dot[i][3];
     dot[i][4] -= 0.04;
-    if (dot[i][4] <= 0) {
+    if (dot[i][4] < 1) {
       dot.shift();
     }
   }
@@ -101,4 +78,25 @@ function randomColor() {
     return "#138D75";
   }
 }
+
+
+canvas.addEventListener("mousemove", function (evt) {
+  mousePos = getMousePos(canvas, evt);
+  if(Date.now() - lastMove > 20) {
+if (dot.length < 200) {
+  var x = mousePos.x;
+  var y = mousePos.y;
+  var vx = Math.round((mousePos.x - oldx) / 8);
+  var vy = Math.round((mousePos.y - oldy) / 8);
+  var taille = 20;
+  var color = randomColor();
+  dot.push([x, y, vx, vy, taille, color]);
+  oldx = mousePos.x;
+  oldy = mousePos.y;
+} else {
+  dot.shift();
+}
+lastMove = Date.now();
+}});
+
 setInterval(draw, 10);

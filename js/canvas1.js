@@ -1,7 +1,7 @@
 var canvas = document.getElementById("canvas1");
 var ctx = canvas.getContext("2d");
 
-var dot = [];
+var dot = []; //Composition de la liste dot [x,y,vx,vy,taille,couleur]
 var lastMove = 0;
 (mousePos = 0), 0;
 
@@ -12,7 +12,6 @@ function draw() {
   //|| document.body.clientWidth;
   canvas.width = width;
   background();
-  dotGeneration();
   dotDraw();
 }
 
@@ -21,39 +20,17 @@ function background() {
   ctx.fillStyle = "#303030";
   ctx.fill();
 }
-function dotGeneration() {
-  canvas.addEventListener("mousemove", function (evt) {
-    mousePos = getMousePos(canvas, evt);
-  });
-  if (dot.length < 200) {
-    var x = mousePos.x;
-    var y = mousePos.y;
-    mousePos = 100;
-    var vx = velocity();
-    var vy = velocity();
-    var taille = 20;
-    var color = randomColor();
-    dot.push([x, y, vx, vy, taille, color]);
-  } else {
-    dot.shift();
-  }
-}
+
 function velocity() {
   var velocity = getRandomInt(360);
   velocity = Math.cos(velocity);
-
   return velocity;
 }
-function positive() {
-  if (getRandomInt(2) == 0) {
-    return true;
-  } else {
-    return false;
-  }
-}
+
 function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
 }
+
 function dotDraw() {
   for (let i = 0; i < dot.length; i++) {
     ctx.beginPath();
@@ -64,7 +41,7 @@ function dotDraw() {
     dot[i][0] += dot[i][2];
     dot[i][1] += dot[i][3];
     dot[i][4] -= 0.04;
-    if (dot[i][4] <= 0) {
+    if (dot[i][4] < 1) {
       dot.shift();
     }
   }
@@ -97,4 +74,22 @@ function randomColor() {
     return "#138D75";
   }
 }
+
+canvas.addEventListener("mousemove", function (evt) {
+  mousePos = getMousePos(canvas, evt);
+  if(Date.now() - lastMove > 20) {
+if (dot.length < 200) {
+  var x = mousePos.x;
+  var y = mousePos.y;
+  mousePos = 100;
+  var vx = velocity();
+  var vy = velocity();
+  var taille = 20;
+  var color = randomColor();
+  dot.push([x, y, vx, vy, taille, color]);
+} else {
+  dot.shift();
+}
+lastMove = Date.now();
+}});
 setInterval(draw, 10);
