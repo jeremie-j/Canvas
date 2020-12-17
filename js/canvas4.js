@@ -25,7 +25,7 @@ function background() {
 }
 
 function dotGeneration() {
-  for(i = 0; i <= 200; i++){
+  for(i = 0; i <= canvas.width/5; i++){
   var x = getRandomInt(canvas.width);
   var y = getRandomInt(canvas.height);
   var vx = velocity();
