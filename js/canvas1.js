@@ -93,7 +93,7 @@ if (dot.length < 200) {
 lastMove = Date.now();
 }});
 
-canvas.addEventListener("ontouchmove", function (evt) {
+canvas.addEventListener("touchmove", function (evt) {
   mousePos = getMousePos(canvas, evt);
   if(Date.now() - lastMove > 20) {
 if (dot.length < 200) {
