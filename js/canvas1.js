@@ -92,4 +92,22 @@ if (dot.length < 200) {
 }
 lastMove = Date.now();
 }});
+
+canvas.addEventListener("TouchEvent", function (evt) {
+  mousePos = getMousePos(canvas, evt);
+  if(Date.now() - lastMove > 20) {
+if (dot.length < 200) {
+  var x = mousePos.x;
+  var y = mousePos.y;
+  mousePos = 100;
+  var vx = velocity();
+  var vy = velocity();
+  var taille = 20;
+  var color = randomColor();
+  dot.push([x, y, vx, vy, taille, color]);
+} else {
+  dot.shift();
+}
+lastMove = Date.now();
+}});
 setInterval(draw, 10);
