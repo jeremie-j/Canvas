@@ -1,7 +1,7 @@
 var canvas = document.getElementById("canvas2");
 var ctx = canvas.getContext("2d");
 
-var dot = []; //Composition de la liste dot [x,y,vx,vy,distancesouris]
+var dot = []; //Composition de la liste dot [x,y,vx,vy,ax,ay,distancesouris, taille]
 var setup = true;
 
 function draw() {
@@ -14,7 +14,7 @@ function draw() {
   dotDraw();
   if (setup == true) {
     dotGeneration();
-    mousePos = 10,10;
+    mousePos = -10,-10;
     setup = false;
   }
 }
@@ -26,15 +26,19 @@ function background() {
 }
 
 function dotGeneration() {
-  for(i = 0; i <= canvas.width/5; i++){
-  var x = getRandomInt(canvas.width);
-  var y = getRandomInt(canvas.height);
-  var vx = velocity();
-  var vy = velocity();
-  var DistanceInter = 0;
-  var taille = getRandomInt(3)+0.5;
-  dot.push([x, y, vx, vy, DistanceInter, taille]);
-  }
+  for(i = canvas.width/30; i <= canvas.width - 30; i += canvas.width/30){
+    for(j = 50; j <= canvas.height - 40; j += 50){
+    var x = Math.round(i);
+    var y = Math.round(j);
+    var vx = 0;
+    var vy = 0;
+    var ax = 0;
+    var ay = 0;
+    var DistanceInter = 0;
+    var taille = 3;
+    var mag = false;
+    dot.push([x, y, vx, vy, ax, ay, DistanceInter, taille, mag]);
+  }}
 }
 
 function velocity() {
@@ -46,42 +50,34 @@ function velocity() {
 function dotDraw() {
   for (i = 0; i < dot.length; i++) {
     ctx.beginPath();
-    ctx.arc(dot[i][0], dot[i][1], dot[i][5], 0, 2 * Math.PI, false);
+    ctx.arc(dot[i][0] + dot[i][2], dot[i][1] + dot[i][3], dot[i][7], 0, 2 * Math.PI, false);
+    console.log(dot[i][0] + dot[i][2])
     ctx.strokeStyle = "#F2F4F4";
     ctx.fillStyle = "#F2F4F4";
     ctx.stroke();
     ctx.fill();
     ctx.closePath();
-    var distanceTrait = 100;
-    for(j = 0; j < dot.length; j++){
-      DistanceInterPoint = calculDistance();
-    if( DistanceInterPoint < distanceTrait){
-      ctx.beginPath();
-      ctx.moveTo(dot[i][0],dot[i][1]);
-      ctx.lineTo(dot[j][0],dot[j][1]);
-      ctx.strokeStyle = "rgba(242, 244, 244," + (DistanceInterPoint - distanceTrait)*-1/distanceTrait + ")";
-      ctx.stroke();
-      ctx.closePath();
-    }}
-    distancesouris = calculDistanceSouris()
-    if(distancesouris < distanceTrait){
-      ctx.beginPath();
-      ctx.moveTo(dot[i][0],dot[i][1]);
-      ctx.lineTo(mousePos.x,mousePos.y);
-      ctx.strokeStyle = "rgba(242, 244, 244," + (distancesouris - distanceTrait)*-1/distanceTrait + ")";
-      ctx.stroke();
-      ctx.closePath();
-    }
-    dot[i][0] += dot[i][2];
-    dot[i][1] += dot[i][3];
     if(dot[i][0] < 0 - 10 || dot[i][0] > canvas.width + 10){
       dot[i][2] *= -1;
     }
     if(dot[i][1] < 0 - 10 || dot[i][1] > canvas.height + 10){
       dot[i][3] *= -1;
     }
+    distanceSouris = calculDistanceSouris();
+    distanceOrigine = calculDistance();
+    if (distanceSouris <= 100 && distanceSouris > 50){
+      dot[i][8] = true;
+    }else{
+      dot[i][8] = false;
+    }
+    if (dot[i][8] == true){
+    dot[i][2] += (mousePos.x - dot[i][0])/distanceSouris*2;
+    dot[i][3] += (mousePos.y - dot[i][1])/distanceSouris*2;
+    }if (dot[i][8] == false && dot[i][3]+dot[i][1] < 0){
+      dot[i][2] -= (dot[i][2] - dot[i][0])/distanceSouris*2;
+      dot[i][3] -= (dot[i][3] - dot[i][1])/distanceSouris*2;
   }
-}
+}}
 
 function getMousePos(canvas, evt) {
   var rect = canvas.getBoundingClientRect();
@@ -96,11 +92,11 @@ function getRandomInt(max) {
 }
 
 function calculDistance(){
-  D = Math.sqrt(Math.pow(dot[i][0] - dot[j][0],2)+Math.pow(dot[i][1] - dot[j][1],2));
+  D = Math.sqrt(Math.pow(dot[i][0] - (dot[i][0] + dot[i][2]) ,2)+Math.pow(dot[i][1] - (dot[i][1]+dot[i][3],2)));
   return D;
 }
 function calculDistanceSouris(){
-  D = Math.sqrt(Math.pow(dot[i][0] - mousePos.x,2)+Math.pow(dot[i][1] - mousePos.y,2));
+  D = Math.sqrt(Math.pow((dot[i][0]+dot[i][2]) - mousePos.x,2)+Math.pow((dot[i][1] + dot[i][2])- mousePos.y,2));
   return D;
 }
 
