@@ -8,13 +8,12 @@ var oldy = 10;
 
 (mousePos = 0), 0;
 function draw() {
-  var width = window.innerWidth - 200;
+  var width = 700;
   //var width = window.innerWidth
   //|| document.documentElement.clientWidth
   //|| document.body.clientWidth;
   canvas.width = width;
   background();
-  console.log(dot[1]);
   dotDraw();
 }
 
@@ -99,4 +98,4 @@ if (dot.length < 200) {
 lastMove = Date.now();
 }});
 
-setInterval(draw, 10);
+var interval = setInterval(draw, 10);

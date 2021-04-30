@@ -6,7 +6,7 @@ var lastMove = 0;
 (mousePos = 0), 0;
 
 function draw() {
-  var width = window.innerWidth - 200;
+  var width = 700;
   //var width = window.innerWidth
   //|| document.documentElement.clientWidth
   //|| document.body.clientWidth;
@@ -110,4 +110,4 @@ if (dot.length < 200) {
 }
 lastMove = Date.now();
 }});
-setInterval(draw, 10);
+var interval = setInterval(draw, 10);

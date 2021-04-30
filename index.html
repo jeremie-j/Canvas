@@ -3,19 +3,60 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/SVGstyle.css">
+    <title>JS Template</title>
 </head>
 
 <body>
-    <div>
-        <h1>Menu</h1>
-        <a href="html/js-canvas.html">Canvas 1</a>
-        <a href="html/js-canvas2.html">Canvas 2</a>
-        <a href="html/js-canvas3.html">Canvas 3</a>
-        <a href="html/js-canvas4.html">Canvas 4</a>
-        <a href="html/js-canvas5.html">Canvas 5</a>
+    <section id="landing">
+    <header><h1 class="padding-left">SOME<br>JAVASCRIPT</h1></header>
+    <h1 class="padding-left">JavaScript Animation</h1>
+    <div id="text-wrapper">
+    <p id="first-text" class="padding-left">Here is some animations templates made with native Javascript on canvas HTML elements.</p>
+    <p id="second-text">Theses animations have been coded by myself, and sometimes inspired of existing effects. There is actually 4
+        animations, I will try to add more in the future.</p>
+        <a href="#slider">Start()</a>
     </div>
+    <svg id="main_wave" preserveAspectRatio="none" viewBox="0 0 1440 954" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M129.964 870.701L0.000275079 916L0.000193632 -2.56079e-05L1440 -2.31671e-05L1440 243C1387.63 217.823 1289.99 169.296 1222.16 196.457C1153.19 224.185 1123.42 328.296 1075.88 396.497C1028.35 464.698 963.059 496.989 882.544 498.501C802.029 500.012 705.146 471.31 627.168 477.952C549.19 484.593 488.972 527.145 436.365 585.086C383.759 643.027 338.763 716.358 282.473 769.736C227.329 822.548 162.037 854.839 129.964 870.701Z" fill="#191919"/>
+        </svg>
+</section>
+<section id="slider">
+    <div id="animations_wrapper">
+        <div>
+            <h2>Confetti</h2>
+            <canvas width="700" height="500" id="canvas1"></canvas>
+        </div>
+        <div>
+            <h2>Confetti (Mouse directed)</h2>
+            <canvas width="700" height="500" id="canvas2"></canvas>
+        </div>
+        <div>
+            <h2>Particules</h2>
+            <canvas width="700" height="500" id="canvas3"></canvas>
+        </div>
+        <div>
+            <h2>Polygon background</h2>
+            <canvas width="700" height="500" id="canvas4"></canvas>
+        </div>
+    </div>
+    <a onclick="Slide(-1)" class="left-button"><svg preserveAspectRatio="none" width="49" height="106" viewBox="0 0 49 106" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+            d="M48 105L10.7078 67.7078C5.5596 62.5596 2.98549 59.9855 2.02104 57.0172C1.17268 54.4063 1.17268 51.5937 2.02104 48.9828C2.98549 46.0145 5.5596 43.4404 10.7078 38.2922L48 0.999988"
+            stroke="#191919" />
+    </svg>
+</a>
+<a onclick="Slide(1)" class="right-button"><svg preserveAspectRatio="none" width="49" height="106" viewBox="0 0 49 106" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+            d="M1 1L38.2922 38.2922C43.4404 43.4404 46.0145 46.0145 46.979 48.9828C47.8273 51.5937 47.8273 54.4063 46.979 57.0172C46.0145 59.9855 43.4404 62.5596 38.2922 67.7078L1 105"
+            stroke="#191919" stroke-linecap="round" />
+    </svg>
+</a>
+</section>
+<script src="./js/slider.js"></script>
+<script src="./js/canvas1.js" class="canvasAnim"></script>
 </body>
 </html>

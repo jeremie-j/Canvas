@@ -1,11 +1,11 @@
-var canvas = document.getElementById("canvas2");
+var canvas = document.getElementById("canvas4");
 var ctx = canvas.getContext("2d");
 
 var dot = []; //Composition de la liste dot [x,y,vx,vy,distancesouris]
 var setup = true;
 
 function draw() {
-  var width = window.innerWidth - 200;
+  var width = 700;
   //var width = window.innerWidth
   //|| document.documentElement.clientWidth
   //|| document.body.clientWidth;
@@ -107,4 +107,4 @@ function calculDistanceSouris(){
 canvas.addEventListener("mousemove", function (evt) {
   mousePos = getMousePos(canvas, evt)});
 
-setInterval(draw, 10);
+  var interval = setInterval(draw, 10);

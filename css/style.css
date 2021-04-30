@@ -1,41 +1,101 @@
-* {
-  margin: 0;
-  padding: 0;
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+@font-face {
+    font-family: "Monoton";
+    src: url('../font/Monoton-Regular.ttf');
+}
+@font-face {
+    font-family: "Spinnaker";
+    src: url('../font/Spinnaker-Regular.ttf');
 }
 
-body {
-  background-color: #212f3d;
+body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #D15E42;
+    overflow-x: hidden;
+    font-family: "Spinnaker";
 }
 
-div {
-  height: 100vh;
-  display: flex;
-  justify-content: space-around;
-  flex-direction: column;
-  align-items: center;
+header{
+    width: 1440px;
+    padding-top: 30px;
+}header>h1{
+    background: linear-gradient(80deg, #FF6F4C 10%, #C4C4C4 20%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: 'Monoton';
+    font-weight: lighter;
+    font-size: 32px;
 }
 
-body {
-  scroll-behavior: smooth;
-  font-family: "Poppins", sans-serif;
-  color: #f2f4f4;
+#landing{
+    height: 100vh;
+    width: 1440px;
+    z-index: 1;
+}#landing>h1{
+    margin-top: 90px;
+    margin-bottom: 40px;
+    font-size: 48px;
+    color: #C4C4C4;
+}
+#text-wrapper{
+    height: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+#first-text{
+    width: 40%;
+    font-size: 28px;
+    color: #C4C4C4;
+    align-self: flex-start;
+    line-height: 30px;
+}
+#second-text{
+    padding-right: 90px;
+    width: 40%;
+    font-size: 28px;
+    color: #191919;
+    align-self: flex-end;
+}
+#text-wrapper>a{
+    text-decoration: none;
+    color: #191919;
+    font-size: 64px;
+    align-self: center;
 }
 
-::-webkit-scrollbar {
-  width: 0px;
+#slider{
+    height: 100vh;
+    width: 1440px;
+    position: relative;
 }
-
-a {
-  text-decoration: none;
-  padding: 15px 50px;
-  border-radius: 5px;
-  font-weight: bold;
-  color: #f2f4f4;
-  border: 2px solid #f2f4f4;
+canvas{
+    background-color: #C4C4C4;
+    border-radius: 10px;
 }
-
-@media (max-width: 640px) {
-  div {
-    height: 80vh;
-  }
+#animations_wrapper{
+    margin: 10% auto;
+    width: 700px;
+    display: flex;
+    overflow-x: hidden;
+}
+a.right-button{
+    top: 27%;
+    position: absolute;
+    right: 10%;
+    cursor: pointer;
+}
+a.left-button{
+    top: 27%;
+    position: absolute;
+    left: 10%;
+    cursor: pointer;
 }

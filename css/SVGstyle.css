@@ -1,0 +1,8 @@
+#main_wave{
+    height: 86%;
+    width : 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
